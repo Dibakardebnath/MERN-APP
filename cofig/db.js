@@ -1,5 +1,8 @@
+require('dotenv').config()
+
+
 const mongoose = require('mongoose')
 
-const connection=mongoose.connect("mongodb+srv://ddibakar190:KQG1emnlC9eLL0vL@cluster0.x5sxwu5.mongodb.net/MERN-APP")
+const connection=mongoose.connect(process.env.MONGO_URL)
 
 module.exports ={connection}
