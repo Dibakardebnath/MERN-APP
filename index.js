@@ -17,6 +17,14 @@ app.use(cors({
 
 app.use(express.json())
 
+
+app.get("/home",async(req,res)=>{
+  res.send("welcome")
+})
+
+
+
+
 app.get("/", async(req, res) => {
    const { category, sortby, order, page, limit } = req.query;
 
