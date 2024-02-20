@@ -23,8 +23,6 @@ app.get("/home",async(req,res)=>{
 })
 
 
-
-
 app.get("/", async(req, res) => {
    const { category, sortby, order, page, limit } = req.query;
 
@@ -85,12 +83,11 @@ app.post("/login",async(req, res) => {
 
     const { email, password}=req.body
        const user=await SignUpModels.findOne({email:email})
-       const userPassword=user.password
+       const userPassword=user.password;
       console.log(userPassword,password)
        if(!user){
         res.status(404).json({msg:"Sign Up First"})
        }else{
-        // console.log(user._id)
         if(userPassword===password){
           var token = jwt.sign({ user_id:user._id }, 'Dibakar');
           res.status(200).json({msg:"Signup Successfully",token:token})
@@ -228,7 +225,7 @@ app.put("/update/:id",Auth, async (req, res) => {
     const id=req.params.id
     const payload=req.body
 
-    const user_id=req.user_id
+    const user_id=req.user_id      //signup id
     const signUser=await SignUpModels.findOne({_id:user_id})
     const signUser_email=signUser.email
 
@@ -274,15 +271,15 @@ console.log(user_email,signUser_email)
 
 
 
-
-app.listen(8000,async()=>{
-    await connection
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, async () => {
+    await connection;
     try {
-        console.log("connection established")
+        console.log("connection established");
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
-})
+});
 
 
 
